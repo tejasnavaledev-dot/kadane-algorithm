@@ -1,0 +1,38 @@
+// kadane algorithm : buy and sell stock
+// Optimize solution
+public int maxProfit(int[] nums) {
+        int profit = 0;
+        int maxProfit = 0;
+        for (int i = 1; i < nums.length; i++) {
+            profit = Math.max(0, nums[i] - nums[i-1] + profit);
+            maxProfit = Math.max(maxProfit, profit);
+        }
+        return maxProfit;
+    }
+
+//most optimize solution
+public int maxProfit(int[] nums) {
+        int minPrice = Integer.MAX_VALUE;
+        int maxProfit = 0;
+        for (int i = 0; i < nums.length; i++) {
+            minPrice = Math.min(minPrice, nums[i]); 
+            maxProfit = Math.max(maxProfit, nums[i] - minPrice); 
+        }
+        return maxProfit;
+    }
+
+//brute-force solution
+class Solution {
+    public int maxProfit(int[] prices) {
+        int maxProfit = Integer.MIN_VALUE;
+        for ( int i = 0 ; i < prices.length - 1 ; i++ ) {
+            for ( int j = i + 1 ; j < prices.length ; j++ ) {
+                int profit = prices[j] - prices[i] ;
+                if ( profit > maxProfit ) {
+                    maxProfit = profit;
+                }
+            }
+        }
+        return ( maxProfit <= 0 ? 0 : maxProfit );
+    }
+}
